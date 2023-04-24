@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { SidenavbarComponent } from './components/sidenavbar/sidenavbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
-<<<<<<< HEAD
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -18,11 +17,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
-=======
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatInputModule } from "@angular/material/input";
-import { MatButtonModule } from "@angular/material/button";
->>>>>>> origin/development
 
 @NgModule({
   declarations: [
@@ -37,7 +31,6 @@ import { MatButtonModule } from "@angular/material/button";
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatInputModule,
-<<<<<<< HEAD
     MatButtonModule,
     MatToolbarModule,
     MatListModule,
@@ -46,9 +39,7 @@ import { MatButtonModule } from "@angular/material/button";
     MatSidenavModule,
     MatExpansionModule,
     MatCardModule,
-=======
-    MatButtonModule
->>>>>>> origin/development
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
