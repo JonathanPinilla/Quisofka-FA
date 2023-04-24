@@ -1,1 +1,44 @@
-<p>login works!</p>
+<div class="flexCont">
+
+  <div class="mat-elevation-z4 formCont">
+
+    <form class="studentForm" [formGroup]="form">
+
+      <h2>Quisofka</h2>
+      <h3>Request questionary code</h3>
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input id="nameInput" matInput placeholder="Name" formControlName="name">
+        <mat-error *ngIf="form.get('name')?.hasError('required')">
+          Name is required
+        </mat-error>
+        <mat-error *ngIf="form.get('name')!.getError('minlength')">
+          Name must be at least 3 characters long
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input id="lastNameInput" matInput placeholder="Last Name" formControlName="lastName">
+        <mat-error *ngIf="form.get('lastName')?.hasError('required')">
+          Last name is required
+        </mat-error>
+        <mat-error *ngIf="form.get('lastName')!.getError('minlength')">
+          Last name must be at least 3 characters long
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input id="emailInput" matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="form.get('email')?.hasError('required')">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="form.get('email')!.getError('email')">
+          Email must be valid
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="warn" [disabled]="!form.valid">Submit</button>
+
+    </form>
+  </div>
+
+</div>
