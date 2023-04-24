@@ -17,6 +17,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { FrequentlyAskedComponent } from './pages/frequently-asked/frequently-asked.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     SidenavbarComponent,
     LoginComponent,
     FooterComponent,
+    ContactUsComponent,
+    FrequentlyAskedComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
