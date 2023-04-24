@@ -3,21 +3,71 @@
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
-    Quisofka
+    <button routerLink="/" mat-icon-button aria-label="Button with home icon">
+      <div class="logo">
+        <p class="logo-text">Quisofka</p>
+      </div>
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav opened mode="side">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <a mat-list-item> <mat-icon>info_outline</mat-icon> Overview </a>
+        <div
+          mat-list-item
+          class="list-item-static"
+          routerLink="/frequently-asked"
+        >
+          <div>
+            <mat-icon>info_outline</mat-icon>
+          </div>
+          <div>
+            <h3>Overview</h3>
+          </div>
+        </div>
       </mat-expansion-panel-header>
       <mat-nav-list>
-        <h2 mat-list-item>Timer</h2>
-        <h3 mat-list-item>Student name</h3>
-        <h3 mat-list-item>Test type</h3>
-        <h3 mat-list-item>Contact us</h3>
-        <h3 mat-list-item>Frequently asked</h3>
+        <div mat-list-item class="list-item-static">
+          <div>
+            <mat-icon>timer</mat-icon>
+          </div>
+          <div>
+            <h2>Timer</h2>
+          </div>
+        </div>
+        <div mat-list-item class="list-item-static">
+          <div>
+            <mat-icon>account_box</mat-icon>
+          </div>
+          <div>
+            <h3>Student name</h3>
+          </div>
+        </div>
+        <div mat-list-item class="list-item-static">
+          <div>
+            <mat-icon>elevator</mat-icon>
+          </div>
+          <div>
+            <h3>Test type</h3>
+          </div>
+        </div>
+        <div mat-list-item class="list-item" routerLink="/contact-us">
+          <div>
+            <mat-icon>chat_bubble</mat-icon>
+          </div>
+          <div>
+            <h3>Contact Us</h3>
+          </div>
+        </div>
+        <div mat-list-item class="list-item" routerLink="/frequently-asked">
+          <div>
+            <mat-icon>contact_support</mat-icon>
+          </div>
+          <div>
+            <h3>Frequently Asked</h3>
+          </div>
+        </div>
       </mat-nav-list>
     </mat-expansion-panel>
   </mat-sidenav>
