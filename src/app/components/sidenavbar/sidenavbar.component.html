@@ -1,1 +1,27 @@
-<p>sidenavbar works!</p>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    Quisofka
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav opened mode="side">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <a mat-list-item> <mat-icon>info_outline</mat-icon> Overview </a>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <h2 mat-list-item>Timer</h2>
+        <h3 mat-list-item>Student name</h3>
+        <h3 mat-list-item>Test type</h3>
+        <h3 mat-list-item>Contact us</h3>
+        <h3 mat-list-item>Frequently asked</h3>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
