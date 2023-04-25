@@ -20,6 +20,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { FrequentlyAskedComponent } from './pages/frequently-asked/frequently-asked.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
+import { StartTestComponent } from './pages/start-test/start-test.component';
 import { TestResultComponent } from './pages/test-result/test-result.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 
@@ -32,6 +34,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     ContactUsComponent,
     FrequentlyAskedComponent,
     NotFoundComponent,
+    StartTestComponent,
     TestResultComponent,
     AboutUsComponent,
   ],
@@ -50,6 +53,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     MatExpansionModule,
     MatCardModule,
     MatButtonModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

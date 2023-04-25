@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
+
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-start-test',
+  templateUrl: './start-test.component.html',
+  styleUrls: ['./start-test.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class StartTestComponent {
 
   title: string = 'Logged in';
   iconn: string = 'success';
@@ -16,9 +17,7 @@ export class LoginComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = this.builder.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
-      lastName: ['', [Validators.required, Validators.minLength(3)]],
-      email: ['', [Validators.required, Validators.email]]
+      code: ['', [Validators.required]],
     })
   }
 
