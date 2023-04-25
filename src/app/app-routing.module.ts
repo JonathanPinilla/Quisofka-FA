@@ -4,19 +4,24 @@ import { LoginComponent } from './pages/login/login.component';
 import { FrequentlyAskedComponent } from './pages/frequently-asked/frequently-asked.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import {StartTestComponent} from "./pages/start-test/start-test.component";
+import { StartTestComponent } from './pages/start-test/start-test.component';
 import { TestResultComponent } from './pages/test-result/test-result.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home-page', pathMatch: 'full' },
+  {
+    path: 'home-page',
+    component: HomePageComponent,
+  },
   {
     path: 'login',
     component: LoginComponent,
   },
   {
     path: 'start-test',
-    component: StartTestComponent
+    component: StartTestComponent,
   },
   {
     path: 'frequently-asked',

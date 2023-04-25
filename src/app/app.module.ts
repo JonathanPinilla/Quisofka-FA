@@ -24,6 +24,7 @@ import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { StartTestComponent } from './pages/start-test/start-test.component';
 import { TestResultComponent } from './pages/test-result/test-result.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
     StartTestComponent,
     TestResultComponent,
     AboutUsComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
