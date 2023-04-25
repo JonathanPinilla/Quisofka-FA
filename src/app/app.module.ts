@@ -20,6 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { FrequentlyAskedComponent } from './pages/frequently-asked/frequently-asked.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { TestResultComponent } from './pages/test-result/test-result.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ContactUsComponent,
     FrequentlyAskedComponent,
     NotFoundComponent,
+    TestResultComponent,
   ],
   imports: [
     BrowserModule,
