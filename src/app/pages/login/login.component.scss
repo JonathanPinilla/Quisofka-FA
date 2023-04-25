@@ -16,11 +16,11 @@ $pink-color: mat.$pink-palette;
 }
 
 .formCont {
-  background: map.get($indigo-color, 500);
+  background: white;
   width: 400px;
   min-height: 500px;
   border-radius: 20px;
-  color: white;
+  color: darkslategrey;
 }
 
 .studentForm {
