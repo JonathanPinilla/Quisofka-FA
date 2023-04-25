@@ -5,6 +5,7 @@ import { FrequentlyAskedComponent } from './pages/frequently-asked/frequently-as
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { TestResultComponent } from './pages/test-result/test-result.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: 'test-result',
     component: TestResultComponent,
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
   },
   {
     path: '**',
