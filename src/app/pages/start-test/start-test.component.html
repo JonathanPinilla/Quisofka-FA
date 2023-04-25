@@ -24,7 +24,7 @@
       </mat-form-field>
 
       <button mat-raised-button color="primary" [disabled]="!form.valid" >Submit</button>
-      <span style="color: darkslategrey"><br>If you don't have a code click here: <button mat-button color="accent" (click)="onSubmit()">request code</button></span>
+      <span style="color: darkslategrey"><br>If you don't have a code click here: <button mat-button color="accent" [routerLink]="['/login']">request code</button></span>
     </form>
   </div>
 
