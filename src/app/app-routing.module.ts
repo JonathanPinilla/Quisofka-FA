@@ -5,6 +5,8 @@ import { FrequentlyAskedComponent } from './pages/frequently-asked/frequently-as
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import {StartTestComponent} from "./pages/start-test/start-test.component";
+import { TestResultComponent } from './pages/test-result/test-result.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,6 +25,14 @@ const routes: Routes = [
   {
     path: 'contact-us',
     component: ContactUsComponent,
+  },
+  {
+    path: 'test-result',
+    component: TestResultComponent,
+  },
+  {
+    path: 'about-us',
+    component: AboutUsComponent,
   },
   {
     path: '**',

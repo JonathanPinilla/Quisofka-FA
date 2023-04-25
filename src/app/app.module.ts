@@ -22,7 +22,8 @@ import { FrequentlyAskedComponent } from './pages/frequently-asked/frequently-as
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
 import { StartTestComponent } from './pages/start-test/start-test.component';
-
+import { TestResultComponent } from './pages/test-result/test-result.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,8 @@ import { StartTestComponent } from './pages/start-test/start-test.component';
     FrequentlyAskedComponent,
     NotFoundComponent,
     StartTestComponent,
+    TestResultComponent,
+    AboutUsComponent,
   ],
   imports: [
     BrowserModule,
