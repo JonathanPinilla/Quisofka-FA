@@ -1,0 +1,31 @@
+<div class="flexCont">
+
+  <swal
+    #confirmRejectSwal
+    title="{{title}}"
+    text="Body"
+    icon="success"
+    [showConfirmButton]="true"
+    [focusCancel]="true">
+  </swal>
+
+  <div class="mat-elevation-z4 formCont">
+
+    <form class="studentForm" [formGroup]="form">
+
+      <h2>Quisofka</h2>
+      <h3>Enter questionary code sent to your email</h3>
+      <mat-form-field color="primary" appearance="outline">
+        <mat-label>Put the test code</mat-label>
+        <input id="codeInput" matInput placeholder="AAA-123" formControlName="code">
+        <mat-error *ngIf="form.get('code')?.hasError('required')">
+          Code is required
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" [disabled]="!form.valid" >Submit</button>
+      <span style="color: darkslategrey"><br>If you don't have a code click here: <button mat-button color="accent" (click)="onSubmit()">request code</button></span>
+    </form>
+  </div>
+
+</div>

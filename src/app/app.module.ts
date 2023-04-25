@@ -20,6 +20,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { FrequentlyAskedComponent } from './pages/frequently-asked/frequently-asked.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { SweetAlert2Module } from "@sweetalert2/ngx-sweetalert2";
+import { StartTestComponent } from './pages/start-test/start-test.component';
+
 
 @NgModule({
   declarations: [
@@ -30,6 +33,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     ContactUsComponent,
     FrequentlyAskedComponent,
     NotFoundComponent,
+    StartTestComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +50,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     MatExpansionModule,
     MatCardModule,
     MatButtonModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

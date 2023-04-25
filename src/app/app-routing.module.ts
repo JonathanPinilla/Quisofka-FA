@@ -4,12 +4,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { FrequentlyAskedComponent } from './pages/frequently-asked/frequently-asked.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import {StartTestComponent} from "./pages/start-test/start-test.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'start-test',
+    component: StartTestComponent
   },
   {
     path: 'frequently-asked',

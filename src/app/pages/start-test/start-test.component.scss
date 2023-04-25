@@ -1,0 +1,36 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+$indigo-color: mat.$indigo-palette;
+$pink-color: mat.$pink-palette;
+
+.flexCont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../assets/loginbg.jpg");
+  background-size: cover;
+}
+
+.formCont {
+  background: white;
+  width: 400px;
+  min-height: 500px;
+  border-radius: 20px;
+  color: darkslategrey;
+}
+
+.studentForm {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+mat-form-field {
+  margin-bottom: 25px;
+}
