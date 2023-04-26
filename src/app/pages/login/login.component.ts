@@ -65,9 +65,9 @@ export class LoginComponent implements OnInit {
           this.swalIcon = "success";
           this.swalText = 'You can now start test with the code sent to your email';
           this.swalConfirm = true;
-          this.quizService.generateQuiz(student.id).subscribe({
+          this.quizService.generateQuiz(student.id, student.level).subscribe({
             next: (result) => {
-              console.log(result);
+              console.log("Quiz generated level: " + student.level);
               //TODO: storage the quiz
             },
             error: (error) => console.log(error),
