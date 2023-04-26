@@ -6,6 +6,7 @@ import {Student} from "../../models/student";
 import * as sweetalert2 from "sweetalert2";
 import {SweetAlertIcon} from "sweetalert2";
 import {Router} from "@angular/router";
+import {QuizService} from "../../services/quiz.service";
 
 @Component({
   selector: 'app-login',
@@ -21,8 +22,12 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup = new FormGroup({})
 
-  constructor(private builder: FormBuilder, private studentService: StudentService, private route: Router) {
-  }
+  constructor(
+    private builder: FormBuilder,
+    private studentService: StudentService,
+    private route: Router,
+    private quizService: QuizService
+  ){}
 
   ngOnInit(): void {
     this.form = this.builder.group({
@@ -60,7 +65,14 @@ export class LoginComponent implements OnInit {
           this.swalIcon = "success";
           this.swalText = 'You can now start test with the code sent to your email';
           this.swalConfirm = true;
-
+          this.quizService.generateQuiz(student.id).subscribe({
+            next: (result) => {
+              console.log(result);
+              //TODO: storage the quiz
+            },
+            error: (error) => console.log(error),
+            complete: () => console.log('complete')
+          });
         } else if(!student.isAuthorized && student.id != "") {
           this.swalTitle = 'You are not authorized to take the test yet';
           this.swalIcon = "warning";
