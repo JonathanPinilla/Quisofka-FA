@@ -25,6 +25,7 @@ import { StartTestComponent } from './pages/start-test/start-test.component';
 import { TestResultComponent } from './pages/test-result/test-result.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
     MatExpansionModule,
     MatCardModule,
     MatButtonModule,
-    SweetAlert2Module.forRoot()
+    SweetAlert2Module.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
