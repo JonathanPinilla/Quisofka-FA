@@ -1,14 +1,5 @@
 <div class="flexCont">
 
-  <swal
-    #confirmRejectSwal
-    title="{{title}}"
-    text="Body"
-    icon="success"
-    [showConfirmButton]="true"
-    [focusCancel]="true">
-  </swal>
-
   <div class="mat-elevation-z4 formCont">
 
     <form class="studentForm" [formGroup]="form">
@@ -46,8 +37,19 @@
         </mat-error>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" [disabled]="!form.valid" >Submit</button>
+      <button mat-raised-button color="primary" [disabled]="!form.valid" (click)="onSubmit()">Submit</button>
       <span style="color: darkslategrey"><br>If you already have a code click here: <button mat-button color="accent" [routerLink]="['/start-test']">Start test</button></span>
+      <swal
+        #confirmRejectSwal
+        [title]=swalTitle
+        [text]=swalText
+        [icon]=swalIcon
+        [showConfirmButton]=swalConfirm
+        [showCloseButton]="true"
+        [focusCancel]="true"
+        (confirm)="goToStartTest()"
+      >
+      </swal>
     </form>
   </div>
 

@@ -1,18 +1,28 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SwalComponent} from "@sweetalert2/ngx-sweetalert2";
+import {StudentService} from "../../services/student.service";
+import {Student} from "../../models/student";
+import * as sweetalert2 from "sweetalert2";
+import {SweetAlertIcon} from "sweetalert2";
+import {Router} from "@angular/router";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
 
-  title: string = 'Logged in';
-  iconn: string = 'success';
+  swalTitle: string = '';
+  swalText: string = '';
+  swalIcon: SweetAlertIcon = 'info';
+  swalConfirm: boolean = false;
 
   form: FormGroup = new FormGroup({})
-  constructor(private builder: FormBuilder) { }
+
+  constructor(private builder: FormBuilder, private studentService: StudentService, private route: Router) {
+  }
 
   ngOnInit(): void {
     this.form = this.builder.group({
@@ -25,15 +35,62 @@ export class LoginComponent implements OnInit{
   @ViewChild('confirmRejectSwal')
   public readonly confirmRejectSwal!: SwalComponent;
 
-  onSubmit(){
-    if(this.form.valid){
-      this.title = 'Logged in';
-      this.iconn = 'success';
-      this.confirmRejectSwal.fire()
-    }else{
-      this.iconn = 'error';
-      this.title = 'Not logged in';
-      this.confirmRejectSwal.fire()
-    }
+  onSubmit() {
+
+    this.swalConfirm = false;
+    this.swalTitle = 'Loading...';
+    this.swalIcon = 'info';
+    this.swalText = 'Please wait...';
+
+
+    var student: Student = {
+      id: "",
+      name: "",
+      lastName: "",
+      email: "",
+      isAuthorized: false,
+      level: ""
+    };
+
+    this.studentService.getStudentByEmail(this.form.value.email).subscribe({
+      next: (result) => {
+        student = result;
+        if (student.isAuthorized && student.id != "") {
+          this.swalTitle = 'the code has ben generated successfully!';
+          this.swalIcon = "success";
+          this.swalText = 'You can now start test with the code sent to your email';
+          this.swalConfirm = true;
+
+        } else if(!student.isAuthorized && student.id != "") {
+          this.swalTitle = 'You are not authorized to take the test yet';
+          this.swalIcon = "warning";
+          this.swalText = 'Please wait for the admin to authorize you';
+          this.swalConfirm = false;
+
+        } else {
+          this.swalTitle = 'There was an error';
+          this.swalIcon= "error";
+          this.swalText = 'Please try again later';
+          this.swalConfirm = false;
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.swalTitle = 'This email is not registered';
+        this.swalIcon= "error";
+        this.swalText = 'Please check it or contact the admin to register you';
+        this.swalConfirm = false;
+      },
+      complete: () => {
+        console.log('complete');
+      }
+    });
+
+    this.confirmRejectSwal.fire();
+
+  }
+
+  goToStartTest(){
+    this.route.navigateByUrl('start-test');
   }
 }
