@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     this.studentService.getStudentByEmail(this.form.value.email).subscribe({
       next: (result) => {
         student = result;
-        if (student.isAuthorized && student.id != "") {
+        if (student.isAuthorized && student.id != "" && student.name == this.form.value.name && student.lastName == this.form.value.lastName) {
           this.swalTitle = 'the code has ben generated successfully!';
           this.swalIcon = "success";
           this.swalText = 'You can now start test with the code sent to your email';
@@ -70,7 +70,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.swalTitle = 'There was an error';
           this.swalIcon= "error";
-          this.swalText = 'Please try again later';
+          this.swalText = 'Please check your information';
           this.swalConfirm = false;
         }
       },
