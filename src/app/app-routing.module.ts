@@ -18,7 +18,7 @@ const routes: Routes = [
     component: HomePageComponent,
   },
   {
-    path: 'login',
+    path: 'get-code',
     component: LoginComponent,
   },
   {
@@ -36,6 +36,7 @@ const routes: Routes = [
   {
     path: 'test-result',
     component: TestResultComponent,
+    ...canActivate(() => redirectUnauthorizedTo(['home-page']))
   },
   {
     path: 'about-us',
@@ -44,7 +45,7 @@ const routes: Routes = [
   {
     path: 'taking-test',
     component: TakingTestComponent,
-    ...canActivate(() => redirectUnauthorizedTo(['start-test']))
+    ...canActivate(() => redirectUnauthorizedTo(['home-page']))
   },
   {
     path: '**',

@@ -6,6 +6,7 @@ import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {interval} from "rxjs";
 import Swal from "sweetalert2";
 import {Router} from "@angular/router";
+import {StudentService} from "../../services/student.service";
 
 @Component({
   selector: 'app-question-container',
@@ -37,7 +38,7 @@ export class QuestionContainerComponent implements OnInit {
     level: 'initial',
   };
 
-  constructor(private service: QuizService, private route: Router) {
+  constructor(private service: QuizService, private route: Router, private studentService: StudentService) {
   }
 
   ngOnInit(): void {
@@ -59,10 +60,32 @@ export class QuestionContainerComponent implements OnInit {
     this.quiz.status = 'FINISHED';
     this.checkAnswers(this.quiz.questionList[this.currentQuestionIndex]);
     this.calculateScore();
-    this.service.logOutFirebase().then(() => {
-      console.log('Logged out');
-    }).catch((error) => {
-      console.log(error);
+
+    this.service.saveResults(localStorage.getItem('quizId') || this.quiz.id).subscribe({
+      next: (result) => {
+
+        var student: any = {
+          id: "",
+          name: "",
+          lastName: "",
+          email: "",
+        };
+
+        this.studentService.getStudentById(this.quiz.studentId).subscribe((result)=>{
+          student = result;
+          this.service.sendResultToEmail(this.quiz, student).subscribe({
+            next: (result) => {},
+            error: (error) => {
+              console.log(error);
+            }
+          });
+        }, (error) => {
+          console.log(error);
+        });
+      },
+      error: (error) => {
+        console.log(error);
+      }
     });
   }
 
@@ -75,6 +98,7 @@ export class QuestionContainerComponent implements OnInit {
           this.getAnswers(result.questionList[0].answers);
           this.selectedAnswers = new Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false);
           this.amountOfQuestions = this.quiz.questionList.length - 1;
+          this.startQuiz(result.id);
           this.startCounter();
         },
         error: (error) => {
@@ -82,17 +106,12 @@ export class QuestionContainerComponent implements OnInit {
         },
         complete: () => {
           this.quiz.status = 'STARTED';
-          console.log(this.quiz.status);
-          console.log(this.quiz);
         }
       });
-    } else {
-      console.log('Go to start quiz and send the quiz id');
     }
   }
 
   checkAnswers(question: any) {
-    console.log(question.answers.length);
     for (let i = 0; i < question.answers.length; i++) {
       if (question.answers[i][1] != this.selectedAnswers[i]) {
         this.quiz.questions[this.currentQuestionIndex][1] = false;
@@ -145,10 +164,18 @@ export class QuestionContainerComponent implements OnInit {
 
   logOut() {
     this.service.logOutFirebase().then(() => {
-      console.log('Logged out');
       this.route.navigate(['/']);
     }).catch((error) => {
       console.log(error);
+    });
+  }
+
+  startQuiz(quizId: string) {
+    this.service.startTest(quizId).subscribe({
+      next: (result) => {},
+      error: (error) => {
+        console.log(error);
+      }
     });
   }
 

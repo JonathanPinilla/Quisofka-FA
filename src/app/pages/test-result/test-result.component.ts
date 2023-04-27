@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./test-result.component.scss'],
 })
 export class TestResultComponent implements OnInit {
-  score: number = 26;
+  score: number = 0;
   previousLevel: string = '';
   achievedLevel: string = '';
   questions: any[] = [];
@@ -22,11 +22,11 @@ export class TestResultComponent implements OnInit {
     questions: [],
     questionList: [],
     score: 0,
-    studentId: 'stId',
-    createdAt: '',
-    startedAt: '',
-    status: 'Generated',
-    level: 'initial',
+    studentId: '...',
+    createdAt: '...',
+    startedAt: '...',
+    status: '...',
+    level: '...',
   };
 
   constructor(private service: QuizService, private route: Router) {}
@@ -44,22 +44,19 @@ export class TestResultComponent implements OnInit {
           this.getQuestions(result.questions);
           this.amountOfQuestions = result.questions.length;
           this.previousLevel = result.level;
-          this.newLevel();
+          this.score = result.score;
           this.countRightAnswers();
+          this.newLevel();
         });
     }
   }
 
   newLevel() {
-    console.log(this.score);
     if (this.score >= 26) {
-      console.log('here');
-      console.log(this.previousLevel);
       if (this.previousLevel === 'INITIAL') {
         this.achievedLevel = 'BASIC';
       }
       if (this.previousLevel === 'BASIC') {
-        console.log('here');
         this.achievedLevel = 'INTERMEDIATE';
       }
     } else {
@@ -83,6 +80,19 @@ export class TestResultComponent implements OnInit {
 
   onContinue() {
     localStorage.removeItem('quizId');
+    localStorage.removeItem('quizLevel');
+    localStorage.removeItem('studentName');
+
+    this.service.logOutFirebase().then(() => {
+    }).catch((error) => {
+      console.log(error);
+    });
+
+    this.service.setQuizData({
+      quizLevel: 'not in quiz',
+      studentName: '...',
+    })
+
     Swal.fire({
       title: 'Congratulations!',
       text: 'You have successfully completed the test!',

@@ -62,9 +62,8 @@ export class StartTestComponent implements OnInit {
     this.quizService.getQuizById(this.form.value.code).subscribe({
       next: (result: Quiz) => {
         quiz = result;
-        console.log(quiz);
+        localStorage.setItem('quizLevel', result.level);
         hoursPassed = this.calculateHoursPassed(result.createdAt);
-        console.log(hoursPassed);
         if (hoursPassed < 24) {
           localStorage.setItem('quizId', this.form.value.code);
           this.swalTitle = 'The quiz is ready!';
@@ -73,19 +72,19 @@ export class StartTestComponent implements OnInit {
           this.swalConfirm = true;
           this.studentService.getStudentById(quiz.studentId).subscribe({
             next: (result) => {
+              localStorage.setItem('studentName', result.name);
+              this.quizService.setQuizData({
+                quizLevel: localStorage.getItem('quizLevel') || '',
+                studentName: localStorage.getItem('studentName') || '',
+              });
               this.quizService.loginFirebase(result.email, result.id).
-              then(() => {
-                console.log("Authentication success");
-              }).
+              then().
               catch((error) => {
                 console.log(error);
               });
             },
             error: (err: any) => {
               console.log(err);
-            },
-            complete: () => {
-              console.log('completed');
             }
           });
         } else {
@@ -101,9 +100,6 @@ export class StartTestComponent implements OnInit {
         this.swalIcon = "error";
         this.swalText = 'Please check it or contact the admin to get a new one';
         this.swalConfirm = false;
-      },
-      complete: () => {
-        console.log('completed');
       }
     });
 

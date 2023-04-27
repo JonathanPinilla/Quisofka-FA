@@ -68,14 +68,10 @@ export class LoginComponent implements OnInit {
           this.swalConfirm = true;
           this.quizService.generateQuiz(student.id).subscribe({
             next: (result) => {
-              console.log("Quiz generated level: " + student.level);
               this.quizService.sendEmail(student.email, student.name, result.id, student);
             },
             error: (error) => {
               console.log(error);
-            },
-            complete: () => {
-              console.log('complete');
             }
           });
         } else if(!student.isAuthorized && student.id != "") {
@@ -97,9 +93,6 @@ export class LoginComponent implements OnInit {
         this.swalIcon= "error";
         this.swalText = 'Please check it or contact the admin to register you';
         this.swalConfirm = false;
-      },
-      complete: () => {
-        console.log('complete');
       }
     });
 
