@@ -11,26 +11,19 @@ export class QuizService {
   private api: string = 'https://quisofka-mvn-b-production.up.railway.app/quisofka/quizzes/quizzes';
   constructor(private http: HttpClient) {}
 
-
-  generateQuiz(studentId: string, level: string) {
-    var levelPath = "";
-    switch (level.toLowerCase()) {
-      case "initial":
-        levelPath = "firstlvl";
-        break;
-
-      case "basic":
-        levelPath = "secondlvl";
-        break;
-
-      case "intermediate":
-        levelPath = "thirdlvl";
-        break;
-    }
-    return this.http.post(this.api + "/" + levelPath, {studentId: studentId});
+  generateQuiz(studentId: string):Observable<Quiz>{
+    return this.http.post<Quiz>(this.api, {studentId: studentId});
   }
 
   getQuizById(id: string){
     return this.http.get<Quiz>(`${this.api}/${id}`);
+  }
+
+  sendEmail(email: string, name:string, quizCode: string) {
+    this.http.post(`${this.api}/emails/generatedCode/${quizCode}`, {to: email, studentName: name}).subscribe(
+      (res) => {
+        console.log(res);
+      }
+    );
   }
 }
