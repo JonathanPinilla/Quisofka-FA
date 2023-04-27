@@ -10,9 +10,9 @@
       <span class="time-left">{{ getFormattedTime() }}</span>
     </div>
   </div>
-  <div>
+  <div class="question-description">
     <span>{{ quiz.questionList[currentQuestionIndex].description }}</span>
-    <div>
+    <div class="question-options">
       <div *ngIf="quiz.questionList[currentQuestionIndex].type == 'multiple' else orElse">
         <div *ngFor="let answer of quiz.questionList[currentQuestionIndex].answers; let i = index;">
           <mat-checkbox [(ngModel)]="selectedAnswers[i]">{{answer[0]}}</mat-checkbox>

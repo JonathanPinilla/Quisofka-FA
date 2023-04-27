@@ -16,7 +16,7 @@ export class QuestionContainerComponent implements OnInit {
   protected readonly Array = Array;
   interval$: any;
   faClock = faClock;
-  timer: number = 10;
+  timer: number = 3600;
   questions: Question[] = [];
   currentQuestion: Question = this.questions[0];
   currentQuestionIndex: number = 0;
