@@ -30,6 +30,7 @@ import { TakingTestComponent } from './pages/taking-test/taking-test.component';
 import { QuestionContainerComponent } from './components/question-container/question-container.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatRadioModule} from "@angular/material/radio";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import {MatRadioModule} from "@angular/material/radio";
     HttpClientModule,
     MatCheckboxModule,
     MatRadioModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],
