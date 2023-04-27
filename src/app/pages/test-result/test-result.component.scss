@@ -81,9 +81,15 @@ body {
   font-size: 1.5rem;
   margin-top: 1rem;
 }
-.result .info {
+
+.result .score {
+  color: white;
+  font-size: 4rem;
+}
+.result .score-points {
   color: $Light-lavender;
-  width: 200px;
+  font-size: 2rem;
+  font-weight: bolder;
 }
 .summary {
   width: 50%;
@@ -104,8 +110,10 @@ body {
 .row {
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.5rem;
   padding: 1.5rem;
 }
 
