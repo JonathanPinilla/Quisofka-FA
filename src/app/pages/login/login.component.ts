@@ -7,6 +7,7 @@ import * as sweetalert2 from "sweetalert2";
 import {SweetAlertIcon} from "sweetalert2";
 import {Router} from "@angular/router";
 import {QuizService} from "../../services/quiz.service";
+import {Quiz} from "../../models/quiz";
 
 @Component({
   selector: 'app-login',
@@ -65,9 +66,10 @@ export class LoginComponent implements OnInit {
           this.swalIcon = "success";
           this.swalText = 'You can now start test with the code sent to your email';
           this.swalConfirm = true;
-          this.quizService.generateQuiz(student.id, student.level).subscribe({
+          this.quizService.generateQuiz(student.id).subscribe({
             next: (result) => {
               console.log("Quiz generated level: " + student.level);
+              this.quizService.sendEmail(student.email, student.name, result.id);
               //TODO: storage the quiz
             },
             error: (error) => console.log(error),

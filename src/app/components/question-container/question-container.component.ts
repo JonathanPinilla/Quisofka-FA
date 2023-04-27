@@ -16,53 +16,8 @@ export class QuestionContainerComponent implements OnInit {
   amountOfQuestions: number = 3;
   quiz: any = {
     id: '',
-    questions: [
-      ["q1", false],
-      ["q2", false],
-      ["q3", false],
-    ],
-    questionList: [
-      {
-        id: 'q1',
-        description: "¿Cuál es el propósito principal de Java?",
-        answers: [
-          ["Crear páginas web", false],
-          ["Crear aplicaciones móviles", false],
-          ["Crear videojuegos", true],
-          ["Crear software de escritorio", true],
-        ],
-        descriptor: "Fundamentos",
-        knowledgeArea: "Java",
-        type: "multiple",
-        level: "initial"
-      },
-      {
-        id: 'q2',
-        description: "¿Qué es Java?",
-        answers: [
-          ["Un lenguaje de programación", true],
-          ["Una marca de café", false],
-          ["Una ciudad en Indonesia", false],
-          ["Un tipo de flor", false],
-        ],
-        descriptor: "Fundamentos",
-        knowledgeArea: "Java",
-        type: "single",
-        level: "initial"
-      },
-      {
-        id: 'q3',
-        description: "¿Qué es un método en Java?",
-        answers: [
-          ["False", false],
-          ["True", true]
-        ],
-        descriptor: "Fundamentos",
-        knowledgeArea: "Java",
-        type: "truefalse",
-        level: "initial"
-      },
-    ],
+    questions: [],
+    questionList: [],
     score: 0,
     studentId: 'stId',
     createdAt: '',
@@ -80,9 +35,7 @@ export class QuestionContainerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.getQuiz();
-    this.selectedAnswers = new Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false);
-    this.amountOfQuestions = this.quiz.questionList.length-1;
+    this.getQuiz();
   }
 
 
@@ -104,11 +57,18 @@ export class QuestionContainerComponent implements OnInit {
   }
 
   getQuiz() {
-    this.service.getQuizById('GDEO-0294').subscribe((result: Quiz) => {
-      this.quiz = result;
-      this.questions = result.questionList;
-      //this.getAnswers(result.questionList[0].answers);
-    });
+    if (localStorage.getItem('quizId') != null) {
+      this.service.getQuizById(localStorage.getItem('quizId')!).subscribe((result: Quiz) => {
+        this.quiz = result;
+        this.questions = result.questionList;
+        this.getAnswers(result.questionList[0].answers);
+        this.selectedAnswers = new Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false);
+        this.amountOfQuestions = this.quiz.questionList.length-1;
+      });
+    }{
+      console.log('Go to start quiz and send the quiz id');
+    }
+
   }
 
   checkAnswers(question:any){
@@ -123,12 +83,12 @@ export class QuestionContainerComponent implements OnInit {
     }
   }
 
-  /*getAnswers(theAnswers:any){
+  getAnswers(theAnswers:any){
     for(const key in theAnswers){
       this.answers.push(key);
       this.correctAns.push(theAnswers[key]);
     }
-  }*/
+  }
 
   calculateScore() {
     this.quiz.score = 0;
