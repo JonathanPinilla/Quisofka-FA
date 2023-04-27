@@ -5,13 +5,14 @@ import {QuizService} from "../../services/quiz.service";
 import {Quiz} from "../../models/quiz";
 import {Router} from "@angular/router";
 import {SweetAlertIcon} from "sweetalert2";
+import {StudentService} from "../../services/student.service";
 
 @Component({
   selector: 'app-start-test',
   templateUrl: './start-test.component.html',
   styleUrls: ['./start-test.component.scss']
 })
-export class StartTestComponent implements OnInit{
+export class StartTestComponent implements OnInit {
 
   swalTitle: string = '';
   swalText: string = '';
@@ -21,8 +22,12 @@ export class StartTestComponent implements OnInit{
 
   form: FormGroup = new FormGroup({})
 
-  constructor(private builder: FormBuilder, private quizService: QuizService, private route: Router) {
-  }
+  constructor(
+    private builder: FormBuilder,
+    private quizService: QuizService,
+    private route: Router,
+    private studentService: StudentService
+  ) {}
 
   ngOnInit(): void {
     this.form = this.builder.group({
@@ -66,6 +71,23 @@ export class StartTestComponent implements OnInit{
           this.swalIcon = "success";
           this.swalText = 'You can now start the test, pres ok to continue';
           this.swalConfirm = true;
+          this.studentService.getStudentById(quiz.studentId).subscribe({
+            next: (result) => {
+              this.quizService.loginFirebase(result.email, result.id).
+              then(() => {
+                console.log("Authentication success");
+              }).
+              catch((error) => {
+                console.log(error);
+              });
+            },
+            error: (err: any) => {
+              console.log(err);
+            },
+            complete: () => {
+              console.log('completed');
+            }
+          });
         } else {
           this.swalTitle = 'Code has expired!';
           this.swalIcon = "error";

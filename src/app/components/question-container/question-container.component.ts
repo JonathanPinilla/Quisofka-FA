@@ -20,9 +20,9 @@ export class QuestionContainerComponent implements OnInit {
   questions: Question[] = [];
   currentQuestion: Question = this.questions[0];
   currentQuestionIndex: number = 0;
-  amountOfQuestions: number = 3;
-  answers:any[] = [];
-  correctAnswer:any[] = [];
+  amountOfQuestions: number = 2;
+  answers: any[] = [];
+  correctAnswer: any[] = [];
   selectedAnswers: any[] = [];
 
   quiz: any = {
@@ -37,10 +37,10 @@ export class QuestionContainerComponent implements OnInit {
     level: 'initial',
   };
 
-  constructor(private service: QuizService, private route: Router) {}
+  constructor(private service: QuizService, private route: Router) {
+  }
 
   ngOnInit(): void {
-    this.startCounter();
     this.getQuiz();
   }
 
@@ -59,37 +59,52 @@ export class QuestionContainerComponent implements OnInit {
     this.quiz.status = 'FINISHED';
     this.checkAnswers(this.quiz.questionList[this.currentQuestionIndex]);
     this.calculateScore();
+    this.service.logOutFirebase().then(() => {
+      console.log('Logged out');
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   getQuiz() {
     if (localStorage.getItem('quizId') != null) {
-      this.service.getQuizById(localStorage.getItem('quizId')!).subscribe((result: Quiz) => {
-        this.quiz = result;
-        this.questions = result.questionList;
-        this.getAnswers(result.questionList[0].answers);
-        this.selectedAnswers = new Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false);
-        this.amountOfQuestions = this.quiz.questionList.length-1;
+      this.service.getQuizById(localStorage.getItem('quizId')!).subscribe( {
+        next: (result: Quiz) => {
+          this.quiz = result;
+          this.questions = result.questionList;
+          this.getAnswers(result.questionList[0].answers);
+          this.selectedAnswers = new Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false);
+          this.amountOfQuestions = this.quiz.questionList.length - 1;
+          this.startCounter();
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {
+          this.quiz.status = 'STARTED';
+          console.log(this.quiz.status);
+          console.log(this.quiz);
+        }
       });
-    }{
+    } else {
       console.log('Go to start quiz and send the quiz id');
     }
-
   }
 
-  checkAnswers(question:any){
+  checkAnswers(question: any) {
     console.log(question.answers.length);
-    for(let i = 0; i < question.answers.length; i++){
+    for (let i = 0; i < question.answers.length; i++) {
       if (question.answers[i][1] != this.selectedAnswers[i]) {
         this.quiz.questions[this.currentQuestionIndex][1] = false;
         break;
-      }else{
+      } else {
         this.quiz.questions[this.currentQuestionIndex][1] = true;
       }
     }
   }
 
-  getAnswers(theAnswers:any){
-    for(const key in theAnswers){
+  getAnswers(theAnswers: any) {
+    for (const key in theAnswers) {
       this.answers.push(key);
       this.correctAnswer.push(theAnswers[key]);
     }
@@ -125,6 +140,15 @@ export class QuestionContainerComponent implements OnInit {
           }
         });
       }
+    });
+  }
+
+  logOut() {
+    this.service.logOutFirebase().then(() => {
+      console.log('Logged out');
+      this.route.navigate(['/']);
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
