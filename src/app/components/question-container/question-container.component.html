@@ -2,12 +2,12 @@
   <div class="header">
     <div class="number-of-count">
       <span class="number-of-question">
-        {{ currentQuestionIndex }} of {{ amountOfQuestions }} questions
+        {{ currentQuestionIndex+1 }} of {{ amountOfQuestions+1 }} questions
       </span>
     </div>
     <div class="timer-div">
-      <mat-icon>timer</mat-icon>
-      <span class="time-left">{{ displayTimer }}</span>
+      <fa-icon [icon]="faClock" class="timer-icon"></fa-icon>
+      <span class="time-left">{{ getFormattedTime() }}</span>
     </div>
   </div>
   <div>
@@ -41,7 +41,7 @@
   </ng-container>
   <ng-template #noMoreQuestions>
     <div>
-      <button mat-raised-button color="warn" id="submit-button" (click)="onSubmit()">Submit</button>
+      <button mat-raised-button color="warn" id="submit-button" [routerLink]="['/test-result']" (click)="onSubmit()">Submit</button>
     </div>
   </ng-template>
 </div>
