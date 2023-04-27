@@ -2,6 +2,10 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Question} from 'src/app/models/question';
 import {Quiz} from 'src/app/models/quiz';
 import {QuizService} from 'src/app/services/quiz.service';
+import {faClock} from "@fortawesome/free-regular-svg-icons";
+import {interval} from "rxjs";
+import Swal from "sweetalert2";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-question-container',
@@ -9,11 +13,18 @@ import {QuizService} from 'src/app/services/quiz.service';
   styleUrls: ['./question-container.component.scss'],
 })
 export class QuestionContainerComponent implements OnInit {
-  displayTimer: number = 60;
+  protected readonly Array = Array;
+  interval$: any;
+  faClock = faClock;
+  timer: number = 10;
   questions: Question[] = [];
   currentQuestion: Question = this.questions[0];
   currentQuestionIndex: number = 0;
   amountOfQuestions: number = 3;
+  answers:any[] = [];
+  correctAnswer:any[] = [];
+  selectedAnswers: any[] = [];
+
   quiz: any = {
     id: '',
     questions: [],
@@ -26,15 +37,10 @@ export class QuestionContainerComponent implements OnInit {
     level: 'initial',
   };
 
-  answers:any[] = [];
-  correctAns:any[] = [];
-  selectedAnswers: any[] = [];
-
-  constructor(private service: QuizService) {
-
-  }
+  constructor(private service: QuizService, private route: Router) {}
 
   ngOnInit(): void {
+    this.startCounter();
     this.getQuiz();
   }
 
@@ -49,11 +55,10 @@ export class QuestionContainerComponent implements OnInit {
   }
 
   onSubmit() {
-    this.quiz.status = 'submitted';
+    this.interval$.unsubscribe();
+    this.quiz.status = 'FINISHED';
     this.checkAnswers(this.quiz.questionList[this.currentQuestionIndex]);
-    console.log(this.quiz.questionList[this.currentQuestionIndex].answers.length);
-    console.log(this.quiz.questions);
-    //TODO: verify the code
+    this.calculateScore();
   }
 
   getQuiz() {
@@ -86,13 +91,41 @@ export class QuestionContainerComponent implements OnInit {
   getAnswers(theAnswers:any){
     for(const key in theAnswers){
       this.answers.push(key);
-      this.correctAns.push(theAnswers[key]);
+      this.correctAnswer.push(theAnswers[key]);
     }
   }
 
   calculateScore() {
-    this.quiz.score = 0;
+    for (let i = 0; i < this.quiz.questions.length; i++) {
+      if (this.quiz.questions[i][1] === true) {
+        this.quiz.score += 2;
+      }
+    }
   }
 
-  protected readonly Array = Array;
+  getFormattedTime() {
+    let mm = Math.floor(this.timer / 60);
+    let ss = this.timer % 60;
+    return `${mm}:${ss}`;
+  }
+
+  startCounter() {
+    this.interval$ = interval(1000).subscribe(() => {
+      this.timer--;
+      if (this.timer <= 0) {
+        this.onSubmit();
+        Swal.fire({
+          title: 'Time is over',
+          text: 'The quiz will be submitted automatically',
+          icon: 'warning',
+          confirmButtonText: 'Ok',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.route.navigate(['/test-result']);
+          }
+        });
+      }
+    });
+  }
+
 }

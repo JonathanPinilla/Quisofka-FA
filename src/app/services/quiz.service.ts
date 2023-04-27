@@ -8,15 +8,15 @@ import { Quiz } from '../models/quiz';
   providedIn: 'root',
 })
 export class QuizService {
-  private api: string = 'https://quisofka-mvn-b-production.up.railway.app/quisofka/quizzes/quizzes';
+  private api: string = 'https://quisofka-mvn-b-production.up.railway.app/quisofka/quizzes';
   constructor(private http: HttpClient) {}
 
   generateQuiz(studentId: string):Observable<Quiz>{
-    return this.http.post<Quiz>(this.api, {studentId: studentId});
+    return this.http.post<Quiz>(this.api+"/quizzes", {studentId: studentId});
   }
 
   getQuizById(id: string){
-    return this.http.get<Quiz>(`${this.api}/${id}`);
+    return this.http.get<Quiz>(`${this.api}/quizzes/${id}`);
   }
 
   sendEmail(email: string, name:string, quizCode: string) {
