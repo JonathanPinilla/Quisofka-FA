@@ -8,6 +8,7 @@ import { StartTestComponent } from './pages/start-test/start-test.component';
 import { TestResultComponent } from './pages/test-result/test-result.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
+import { TakingTestComponent } from './pages/taking-test/taking-test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home-page', pathMatch: 'full' },
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'about-us',
     component: AboutUsComponent,
+  },
+  {
+    path: 'taking-test',
+    component: TakingTestComponent,
   },
   {
     path: '**',

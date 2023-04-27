@@ -26,6 +26,8 @@ import { TestResultComponent } from './pages/test-result/test-result.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import {HttpClientModule} from "@angular/common/http";
+import { TakingTestComponent } from './pages/taking-test/taking-test.component';
+import { QuestionContainerComponent } from './components/question-container/question-container.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import {HttpClientModule} from "@angular/common/http";
     TestResultComponent,
     AboutUsComponent,
     HomePageComponent,
+    TakingTestComponent,
+    QuestionContainerComponent,
   ],
   imports: [
     BrowserModule,

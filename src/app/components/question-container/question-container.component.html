@@ -1,0 +1,34 @@
+<div id="display-container">
+  <div class="header">
+    <div class="number-of-count">
+      <span class="number-of-question">
+        {{ currentQuestionIndex }} of {{ amountOfQuestions }} questions
+      </span>
+    </div>
+    <div class="timer-div">
+      <mat-icon>timer</mat-icon>
+      <span class="time-left">{{ displayTimer }}</span>
+    </div>
+  </div>
+  <div>
+    <span>{{ questions[currentQuestionIndex].description }}</span>
+    <div>
+      <span><br>{{answers[0]}} respuesta: {{correctAns[0]}}</span>
+      <span><br><br>{{answers[1]}} respuesta: {{correctAns[1]}}</span>
+      <span><br><br>{{answers[2]}} respuesta: {{correctAns[2]}}</span>
+      <span><br><br>{{answers[3]}} respuesta: {{correctAns[3]}}</span>
+    </div>
+  </div>
+  <ng-container
+    *ngIf="currentQuestionIndex < amountOfQuestions; else noMoreQuestions"
+  >
+    <div id="container">
+      <button id="next-button" (click)="onNextQuestionClick()">Next</button>
+    </div>
+  </ng-container>
+  <ng-template #noMoreQuestions>
+    <div>
+      <button id="submit-button" (click)="onSubmit()">Submit</button>
+    </div>
+  </ng-template>
+</div>
