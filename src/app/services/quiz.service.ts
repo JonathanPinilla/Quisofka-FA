@@ -15,7 +15,7 @@ export class QuizService {
     return this.http.post(this.api, { studentId: studentId });
   }
 
-  getQuizById(id: string): Observable<Quiz> {
+  getQuizById(id: string){
     return this.http.get<Quiz>(`${this.api}/${id}`);
   }
 }

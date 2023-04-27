@@ -11,7 +11,13 @@
     </div>
   </div>
   <div>
-    <span>{{ questions[0] }}</span>
+    <span>{{ questions[currentQuestionIndex].description }}</span>
+    <div>
+      <span><br>{{answers[0]}} respuesta: {{correctAns[0]}}</span>
+      <span><br><br>{{answers[1]}} respuesta: {{correctAns[1]}}</span>
+      <span><br><br>{{answers[2]}} respuesta: {{correctAns[2]}}</span>
+      <span><br><br>{{answers[3]}} respuesta: {{correctAns[3]}}</span>
+    </div>
   </div>
   <ng-container
     *ngIf="currentQuestionIndex < amountOfQuestions; else noMoreQuestions"
