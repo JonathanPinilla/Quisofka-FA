@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { SidenavbarComponent } from './components/sidenavbar/sidenavbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './pages/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -28,6 +28,8 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import {HttpClientModule} from "@angular/common/http";
 import { TakingTestComponent } from './pages/taking-test/taking-test.component';
 import { QuestionContainerComponent } from './components/question-container/question-container.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -61,7 +63,10 @@ import { QuestionContainerComponent } from './components/question-container/ques
     MatCardModule,
     MatButtonModule,
     SweetAlert2Module.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

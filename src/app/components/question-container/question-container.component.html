@@ -1,4 +1,4 @@
-<div id="display-container">
+<div id="display-container" class="mat-elevation-z4">
   <div class="header">
     <div class="number-of-count">
       <span class="number-of-question">
@@ -11,24 +11,37 @@
     </div>
   </div>
   <div>
-    <span>{{ questions[currentQuestionIndex].description }}</span>
+    <span>{{ quiz.questionList[currentQuestionIndex].description }}</span>
     <div>
-      <span><br>{{answers[0]}} respuesta: {{correctAns[0]}}</span>
-      <span><br><br>{{answers[1]}} respuesta: {{correctAns[1]}}</span>
-      <span><br><br>{{answers[2]}} respuesta: {{correctAns[2]}}</span>
-      <span><br><br>{{answers[3]}} respuesta: {{correctAns[3]}}</span>
+      <div *ngIf="quiz.questionList[currentQuestionIndex].type == 'multiple' else orElse">
+        <div *ngFor="let answer of quiz.questionList[currentQuestionIndex].answers; let i = index;">
+          <mat-checkbox [(ngModel)]="selectedAnswers[i]">{{answer[0]}}</mat-checkbox>
+        </div>
+      </div>
+      <ng-template #orElse>
+        <mat-radio-group>
+          <div *ngFor="let answer of quiz.questionList[currentQuestionIndex].answers; let i = index">
+            <mat-radio-button
+              [checked]="false"
+              (click)="selectedAnswers = Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false); selectedAnswers[i]=true;">
+              {{answer[0]}}
+            </mat-radio-button>
+            <mat-radio-button style="position: absolute;left: -1000px" [value]=null></mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </ng-template>
     </div>
   </div>
   <ng-container
     *ngIf="currentQuestionIndex < amountOfQuestions; else noMoreQuestions"
   >
     <div id="container">
-      <button id="next-button" (click)="onNextQuestionClick()">Next</button>
+      <button mat-raised-button color="accent" id="next-button" (click)="onNextQuestionClick()">Next</button>
     </div>
   </ng-container>
   <ng-template #noMoreQuestions>
     <div>
-      <button id="submit-button" (click)="onSubmit()">Submit</button>
+      <button mat-raised-button color="warn" id="submit-button" (click)="onSubmit()">Submit</button>
     </div>
   </ng-template>
 </div>
