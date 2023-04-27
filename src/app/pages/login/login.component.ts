@@ -69,11 +69,14 @@ export class LoginComponent implements OnInit {
           this.quizService.generateQuiz(student.id).subscribe({
             next: (result) => {
               console.log("Quiz generated level: " + student.level);
-              this.quizService.sendEmail(student.email, student.name, result.id);
-              //TODO: storage the quiz
+              this.quizService.sendEmail(student.email, student.name, result.id, student);
             },
-            error: (error) => console.log(error),
-            complete: () => console.log('complete')
+            error: (error) => {
+              console.log(error);
+            },
+            complete: () => {
+              console.log('complete');
+            }
           });
         } else if(!student.isAuthorized && student.id != "") {
           this.swalTitle = 'You are not authorized to take the test yet';
