@@ -4,14 +4,12 @@
       <section class="result">
         <h3 class="title">Your Result</h3>
         <div class="circle">
-          <h1>27</h1>
-          <p>of 30</p>
+          <h1>{{ rightAnswers }}</h1>
+          <p>{{ amountOfQuestions }}</p>
         </div>
-        <b>Awesome</b>
-        <p class="info">
-          You have passed the test and now you can continue with your learning
-          journey.
-        </p>
+        <h3 class="title">Your Score</h3>
+        <p class="score">{{ score }}</p>
+        <h3 class="title">of {{ amountOfQuestions * 2 }} maximum points</h3>
       </section>
       <section class="summary">
         <h3 class="title">Summary</h3>
@@ -20,16 +18,16 @@
             <div class="badge">
               <b>Previous Level</b>
             </div>
-            <b>Initial</b>
+            <b>{{ previousLevel }}</b>
           </div>
           <div class="row">
             <div class="badge">
-              <b>Current Level</b>
+              <b>Achieved Level</b>
             </div>
-            <b>Basic</b>
+            <b> {{ achievedLevel }}</b>
           </div>
         </div>
-        <button class="btn">Continue</button>
+        <button class="btn" (click)="onContinue()">Continue</button>
       </section>
     </div>
   </div>
