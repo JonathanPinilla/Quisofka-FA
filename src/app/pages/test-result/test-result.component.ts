@@ -98,7 +98,7 @@ export class TestResultComponent implements OnInit {
     localStorage.removeItem('quizId');
     localStorage.removeItem('quizLevel');
     localStorage.removeItem('studentName');
-
+    localStorage.removeItem('currentQuestion');
     this.service.logOutFirebase().then(() => {
     }).catch((error) => {
       console.log(error);
