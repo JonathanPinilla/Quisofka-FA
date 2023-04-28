@@ -100,11 +100,6 @@ export class QuestionContainerComponent implements OnInit {
           this.selectedAnswers = new Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false);
           this.amountOfQuestions = this.quiz.questionList.length - 1;
           this.startQuiz(result);
-          this.startCounter(this.calculateHoursPassed(result.startedAt));
-          if (this.calculateHoursPassed(result.startedAt) >= 3600){
-            console.log("Time is over");
-            this.route.navigate(['/test-result']);
-          }
         },
         error: (error) => {
           console.log(error);
@@ -181,11 +176,16 @@ export class QuestionContainerComponent implements OnInit {
       console.log("Quiz is finished");
     }else if(quiz.status.toLowerCase() == "generated"){
       this.service.startTest(quiz.id).subscribe({
-        next: (result) => {},
+        next: (result) => {
+          console.log("started test");
+          this.startCounter(this.calculateHoursPassed(result.startedAt));
+        },
         error: (error) => {
           console.log(error);
         }
       });
+    } else {
+      this.startCounter(this.calculateHoursPassed(quiz.startedAt));
     }
   }
 
