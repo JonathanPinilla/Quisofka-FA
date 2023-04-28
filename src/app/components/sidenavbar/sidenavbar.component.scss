@@ -1,0 +1,48 @@
+mat-sidenav-content {
+  height: 86.4vh;
+}
+
+.list-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
+  cursor: pointer;
+  &:hover {
+    scale: 1.1;
+  }
+}
+
+.list-item-static {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 40px;
+}
+
+.list-item div:first-child {
+  margin-right: 10px;
+}
+
+.list-item-static div:first-child {
+  margin-right: 10px;
+}
+
+.list-item h3 {
+  margin: 0;
+}
+
+.list-item-static h3 {
+  margin: 0;
+}
+
+.list-item-static h2 {
+  margin: 0;
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 600;
+
+  color: white;
+}

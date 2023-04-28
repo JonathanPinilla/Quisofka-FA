@@ -1,0 +1,34 @@
+<body>
+  <div class="card">
+    <div class="card-container">
+      <section class="result">
+        <h3 class="title">Your Result</h3>
+        <div class="circle">
+          <h1>{{ rightAnswers }}</h1>
+          <p>{{ amountOfQuestions }}</p>
+        </div>
+        <h3 class="title">Your Score</h3>
+        <p class="score">{{ score }}</p>
+        <h3 class="title">of {{ amountOfQuestions * 2 }} maximum points</h3>
+      </section>
+      <section class="summary">
+        <h3 class="title">Summary</h3>
+        <div class="rows">
+          <div class="row">
+            <div class="badge">
+              <b>Previous Level</b>
+            </div>
+            <b>{{ previousLevel }}</b>
+          </div>
+          <div class="row">
+            <div class="badge">
+              <b>Achieved Level</b>
+            </div>
+            <b> {{ achievedLevel }}</b>
+          </div>
+        </div>
+        <button class="btn" (click)="onContinue()">Continue</button>
+      </section>
+    </div>
+  </div>
+</body>

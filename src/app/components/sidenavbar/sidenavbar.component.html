@@ -1,0 +1,73 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <button routerLink="/" mat-icon-button aria-label="Button with home icon">
+      <div class="logo">
+        <p class="logo-text">Quisofka</p>
+      </div>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav opened mode="side">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <div mat-list-item class="list-item-static">
+          <div>
+            <mat-icon>info_outline</mat-icon>
+          </div>
+          <div>
+            <h3>Overview</h3>
+          </div>
+        </div>
+      </mat-expansion-panel-header>
+      <mat-nav-list>
+        <div mat-list-item class="list-item-static">
+          <div>
+            <mat-icon>account_box</mat-icon>
+          </div>
+          <div>
+            <h3>{{quizData.studentName}}</h3>
+          </div>
+        </div>
+        <div mat-list-item class="list-item-static">
+          <div>
+            <mat-icon>elevator</mat-icon>
+          </div>
+          <div>
+            <h3>{{quizData.quizLevel}}</h3>
+          </div>
+        </div>
+        <div mat-list-item class="list-item" routerLink="/about-us">
+          <div>
+            <mat-icon>label_important</mat-icon>
+          </div>
+          <div>
+            <h3>About Us</h3>
+          </div>
+        </div>
+        <div mat-list-item class="list-item" routerLink="/contact-us">
+          <div>
+            <mat-icon>chat_bubble</mat-icon>
+          </div>
+          <div>
+            <h3>Contact Us</h3>
+          </div>
+        </div>
+        <div mat-list-item class="list-item" routerLink="/frequently-asked">
+          <div>
+            <mat-icon>contact_support</mat-icon>
+          </div>
+          <div>
+            <h3>Frequently Asked</h3>
+          </div>
+        </div>
+      </mat-nav-list>
+    </mat-expansion-panel>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
