@@ -52,6 +52,7 @@ export class QuestionContainerComponent implements OnInit {
       this.checkAnswers(this.currentQuestion);
       this.currentQuestionIndex += 1;
       this.selectedAnswers = new Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false);
+      localStorage.setItem('currentQuestion', this.currentQuestionIndex.toString());
     }
   }
 
@@ -99,6 +100,10 @@ export class QuestionContainerComponent implements OnInit {
           this.getAnswers(result.questionList[0].answers);
           this.selectedAnswers = new Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false);
           this.amountOfQuestions = this.quiz.questionList.length - 1;
+          if(localStorage.getItem('currentQuestion') != null){
+            this.currentQuestionIndex = parseInt(localStorage.getItem('currentQuestion')!);
+            this.currentQuestion = this.quiz.questionList[this.currentQuestionIndex];
+          }
           this.startQuiz(result);
         },
         error: (error) => {

@@ -64,7 +64,7 @@ export class StartTestComponent implements OnInit {
         quiz = result;
         localStorage.setItem('quizLevel', result.level);
         hoursPassed = this.calculateHoursPassed(result.createdAt);
-        if (hoursPassed < 24) {
+        if (hoursPassed < 24 && result.status.toLowerCase() != 'finished') {
           localStorage.setItem('quizId', this.form.value.code);
           this.swalTitle = 'The quiz is ready!';
           this.swalIcon = "success";
@@ -88,7 +88,7 @@ export class StartTestComponent implements OnInit {
             }
           });
         } else {
-          this.swalTitle = 'Code has expired!';
+          this.swalTitle = 'Code not valid!';
           this.swalIcon = "error";
           this.swalText = 'Please contact the admin to get a new code';
           this.swalConfirm = false;
