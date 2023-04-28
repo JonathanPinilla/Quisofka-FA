@@ -30,8 +30,8 @@ export class QuizService {
     return this.http.patch(this.api+"/quizzes/start/"+quizId,{});
   }
 
-  saveResults(quizId: string){
-    return this.http.patch(this.api+"/quizzes/submit/"+quizId, {});
+  saveResults(quiz: Quiz){
+    return this.http.patch(this.api+"/quizzes/submit/"+quiz.id, quiz);
   }
 
   sendResultToEmail(quiz: Quiz, student: Student):Observable<Quiz>{

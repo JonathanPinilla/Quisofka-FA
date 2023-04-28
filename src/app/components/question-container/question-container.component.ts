@@ -61,7 +61,7 @@ export class QuestionContainerComponent implements OnInit {
     this.checkAnswers(this.quiz.questionList[this.currentQuestionIndex]);
     this.calculateScore();
 
-    this.service.saveResults(localStorage.getItem('quizId') || this.quiz.id).subscribe({
+    this.service.saveResults(this.quiz).subscribe({
       next: (result) => {
 
         var student: any = {
@@ -82,10 +82,11 @@ export class QuestionContainerComponent implements OnInit {
         }, (error) => {
           console.log(error);
         });
+        this.route.navigate(['/test-result']);
       },
       error: (error) => {
         console.log(error);
-      }
+      },
     });
   }
 
@@ -98,8 +99,12 @@ export class QuestionContainerComponent implements OnInit {
           this.getAnswers(result.questionList[0].answers);
           this.selectedAnswers = new Array(this.quiz.questionList[this.currentQuestionIndex].answers.length).fill(false);
           this.amountOfQuestions = this.quiz.questionList.length - 1;
-          this.startQuiz(result.id);
-          this.startCounter();
+          this.startQuiz(result);
+          this.startCounter(this.calculateHoursPassed(result.startedAt));
+          if (this.calculateHoursPassed(result.startedAt) >= 3600){
+            console.log("Time is over");
+            this.route.navigate(['/test-result']);
+          }
         },
         error: (error) => {
           console.log(error);
@@ -143,7 +148,8 @@ export class QuestionContainerComponent implements OnInit {
     return `${mm}:${ss}`;
   }
 
-  startCounter() {
+  startCounter(time: number) {
+    this.timer -= time;
     this.interval$ = interval(1000).subscribe(() => {
       this.timer--;
       if (this.timer <= 0) {
@@ -170,13 +176,27 @@ export class QuestionContainerComponent implements OnInit {
     });
   }
 
-  startQuiz(quizId: string) {
-    this.service.startTest(quizId).subscribe({
-      next: (result) => {},
-      error: (error) => {
-        console.log(error);
-      }
-    });
+  startQuiz(quiz: Quiz) {
+    if (quiz.status.toLowerCase() == "finished"){
+      console.log("Quiz is finished");
+    }else if(quiz.status.toLowerCase() == "generated"){
+      this.service.startTest(quiz.id).subscribe({
+        next: (result) => {},
+        error: (error) => {
+          console.log(error);
+        }
+      });
+    }
+  }
+
+  calculateHoursPassed(receivedDate: any): number {
+
+    var currentDateString: string = new Date().toISOString();
+    const receivedDateTime = new Date(receivedDate); // Convert received string to Date object
+    const currentDateTime = new Date(currentDateString);
+    const millisecondsPassed = currentDateTime.getTime() - receivedDateTime.getTime()+(5*3600000); // Calculate difference in milliseconds
+    const sec = Math.floor(millisecondsPassed / (1000)); // Convert milliseconds to seconds
+    return sec;
   }
 
 }
