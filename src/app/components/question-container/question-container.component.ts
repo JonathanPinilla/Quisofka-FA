@@ -179,6 +179,7 @@ export class QuestionContainerComponent implements OnInit {
   startQuiz(quiz: Quiz) {
     if (quiz.status.toLowerCase() == "finished"){
       console.log("Quiz is finished");
+      this.route.navigate(['/test-result']);
     }else if(quiz.status.toLowerCase() == "generated"){
       this.service.startTest(quiz.id).subscribe({
         next: (result) => {
