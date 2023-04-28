@@ -68,7 +68,7 @@ export class StartTestComponent implements OnInit {
           localStorage.setItem('quizId', this.form.value.code);
           this.swalTitle = 'The quiz is ready!';
           this.swalIcon = "success";
-          this.swalText = 'You can now start the test, pres ok to continue';
+          this.swalText = 'You can now start the test, press ok to continue';
           this.swalConfirm = true;
           this.studentService.getStudentById(quiz.studentId).subscribe({
             next: (result) => {
