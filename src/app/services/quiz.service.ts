@@ -26,8 +26,8 @@ export class QuizService {
     return this.http.post<Quiz>(this.api+"/quizzes", {studentId: studentId});
   }
 
-  startTest(quizId: string){
-    return this.http.patch(this.api+"/quizzes/start/"+quizId,{});
+  startTest(quizId: string):Observable<Quiz>{
+    return this.http.patch<Quiz>(this.api+"/quizzes/start/"+quizId,{});
   }
 
   saveResults(quiz: Quiz){
